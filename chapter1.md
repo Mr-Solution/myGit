@@ -1,3 +1,40 @@
+## 1. Two Sum
+
+Given an array of integers, return **indices** of the two numbers such that they add up to a specific target. You may assume that each input would have exactly **one** solution, and you may not use the same element twice.
+
+Example: 
+
+> Given nums = [2, 7, 11, 15], target = 9,
+>
+> Because nums[0] + num[1] = 9,
+>
+> return [0, 1].
+
+只用一趟遍历实现，用到了C++11提供的无序关联容器unordered_map，其使用了哈希表，能够快速的存取数据（时间复杂度O(1)）。所以算法的整体时间复杂度为O(n)。
+
+```c++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        std::vector<int> vret;  // 存储返回值ret的vector结构
+        std::unordered_map<int, int> umap;  //umap存储key-value键值对，key为nums[i], value为 i
+        for (int i=0; i < nums.size(); ++i) {
+            int a = target - nums[i];
+            if (umap.find(a) != umap.end()) {
+                // 匹配成功
+                vret.push_back(i);
+                vret.push_back(umap.find(a)->second);
+            }
+            else {
+                // 开始时，umap是空的，每次查找不成功则把当前的 <nums[i],i> 存入umap中。即每次匹配时，都是在已经遍历过的元素中查找
+                umap.insert(std::unordered_map<int, int>::value_type(nums[i], i));
+            }
+        }
+        return vret;
+    }
+};
+```
+
 
 
 ## 2. Add Two Numbers
