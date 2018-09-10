@@ -107,4 +107,19 @@ public:
 };
 ```
 答案的做法通过判断 x > revertedNumber， 将整个过程折半，不仅使时间消耗减半，同时由于 x 并没有减为 0 ，故不需要中间变量存储 x 的初始值，减少了不必要的空间消耗。  
-_Note_: C99 开始支持布尔型，声明方式为 _Bool
+_Note_: C99 开始支持布尔型，声明方式为 _Bool  
+
+## 10. Regular Expression Matching
+
+**字符串匹配**
+
+Implement regular expression matching with support for '.' and '*'.  
+'.' Matches any single character.  
+'\*' Matches zero or more of the preceding element.  
+Some examples:  
+isMatch("aa", "a")  ->  false  
+isMatch("aa", "a\*")  ->  true  
+isMatch("ab", ".\*")  ->  true  
+isMatch("aab", "c\*a\*b")  ->  true  
+
+在这个问题中，'.' 符号是一个通配符，'\*' 和它之前的字符配成一对，表示字符出现的次数。'\*' 是最棘手的存在，因为我们永远不知道它表示多长一个字符串。
