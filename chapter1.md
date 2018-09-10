@@ -1,5 +1,7 @@
 ## 1. Two Sum
 
+两数之和，求两个加数的序号。
+
 Given an array of integers, return **indices** of the two numbers such that they add up to a specific target. You may assume that each input would have exactly **one** solution, and you may not use the same element twice.
 
 Example: 
@@ -90,10 +92,13 @@ public:
 
 ## 7.Reverse Integer
 
+翻转整数
+
 **Tags: 数值表示范围，溢出**
 
 Given a 32-bit signed integer, reverse digits of an integer.
 Example：
+
 > Input: 123    
 > Output: 321
 > 
@@ -125,8 +130,21 @@ public:
 
 ## 9. Palindrome Number
 
-**回文、取整取余**  
+判定回文数字
+
+**Tags: 回文、取整取余**  
 Determine whether an integer is a palindrome. Do this without extra space.  
+
+> Example:
+>
+> Input: 121
+>
+> Output: true
+>
+> Input: -121
+>
+> Output: false
+
 ``` C++
 class Solution {
 public:
