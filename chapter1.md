@@ -89,8 +89,54 @@ public:
 };
 ```
 
+## 3. Longest Substring Without Repeating Characters
 
-## 7.Reverse Integer
+Given a string, find the length of the **longest substring** without repeating characters.
+最长无重复字串问题
+
+> Example 1:
+>
+> Input: "abcabcbb"
+>
+> Output: 3
+>
+> The longest substring without repeating characters is "abc", with the length of 3
+>
+> Example 2:
+>
+> Input: "bbbbbb"
+>
+> Output: 1
+>
+> The substring is "b", with the length of 1.
+
+Note: **subsequence** and **substring**. For example, to the string "pwwkew", "pwke" is a subsequence while "wke" is a substring.
+
+对于“without repeating”的统计问题，一般应优先考虑用二进制编码符号位（0|1）来标记某个 character 是否出现。针对本题，由于我们要统计连续出现的字符的个数，二进制符号位包含的信息量过少，但是其中的编码思想仍然可以借鉴。这里考虑用一个 vector 来代替二进制编码，vector 中的每一个元素作为特定字符的标记位。
+
+```c++
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        // vector CHV 的 index 值代表字母的ASCII码值（A），value=-1 表示该字母未出现，value>0 表示该字母已出现，且出现的在s[value]的位置上
+        // ASCII码表长度为128，故初始化128个int型为-1
+        std::vector<int> CHV(128, -1);
+        int maxLen = 0, start = -1;
+        for (int i=0; i<s.length(); ++i) {
+            if (CHV[s[i]] > start) {
+                start = CHV[s[i]];
+            }
+            CHV[s[i]] = i;
+            maxLen = max(maxLen, i-start);
+        }
+        return maxLen;
+    }
+};
+```
+
+
+
+## 7. Reverse Integer
 
 翻转整数
 
