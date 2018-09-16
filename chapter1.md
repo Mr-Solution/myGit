@@ -134,6 +134,69 @@ public:
 };
 ```
 
+## 4. Median of Two Sorted Arrays
+
+寻找两个有序数组的中位数。
+
+```c++
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int m = nums1.size();
+        int n = nums2.size();
+        if (m > n) {
+            std::vector<int> tmp;
+            tmp = nums1;
+            nums1 = nums2;
+            nums2 = tmp;
+            m = nums1.size();
+            n = nums2.size();
+        }
+        int iMin = 0; int iMax = m; int half = (m+n+1)/2;
+        while(iMin <= iMax) {
+            int i = (iMin + iMax)/2;
+            int j = half - i;
+            cout << i << " " << j << endl;
+            if (i<iMax && nums2[j-1] > nums1[i]) {
+                iMin = i+1;
+            }
+            else if (i>iMin && nums1[i-1] > nums2[j]) {
+                iMax = i-1;
+            }
+            else {
+                int maxLeft = 0;
+                if (0 == i) {
+                    maxLeft = nums2[j-1];
+                }
+                else if (0 == j) {
+                    maxLeft = nums1[i-1];
+                }
+                else {
+                    maxLeft = nums1[i-1] > nums2[j-1] ? nums1[i-1]:nums2[j-1];
+                }
+                if ( (m + n) % 2 == 1 ) { 
+                    return maxLeft; 
+                }
+
+                int minRight = 0;
+                if (i == m) { 
+                    minRight = nums2[j]; 
+                }
+                else if (j == n) { 
+                    minRight = nums1[i]; 
+                }
+                else { 
+                    minRight = nums2[j] > nums1[i] ? nums1[i] : nums2[j];
+                }
+
+                return (maxLeft + minRight) / 2.0;
+            }
+        }
+        return 0;
+    }
+};
+```
+
 
 
 ## 7. Reverse Integer
